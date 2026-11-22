@@ -1,25 +1,37 @@
-import mongoose from "mongoose"
+import mongoose from "mongoose";
 
 const userSchema = new mongoose.Schema(
   {
-    name: { type: String, required: true, trim: true },
-    email: { type: String, required: true, unique: true, lowercase: true, trim: true },
-    password: { type: String, required: true, select: false },
-    role: { type: String, enum: ["student", "teacher"], required: true },
-
-    // Student only (the only academic detail a student enters)
-    rollNumber: {
+    name: {
       type: String,
-      trim: true,
-      required: function () { return this.role === "student"; },
+      required: true,
+      trim: true
     },
-
-    // Teacher only (optional)
-    department: { type: String, trim: true },
-
-    isActive: { type: Boolean, default: true },
+    email: {
+      type: String,
+      required: true,
+      unique: true,
+      lowercase: true,
+      trim: true
+    },
+    password: {
+      type: String,
+      required: true,
+      select: false
+    },
+    role: {
+      type: String,
+      enum: ["student", "teacher"],
+      required: true
+    },
+    isActive: {
+      type: Boolean,
+      default: true
+    }
   },
   { timestamps: true }
 );
 
-module.exports = mongoose.model("User", userSchema);
+const User = mongoose.model("User", userSchema);
+
+export default User;

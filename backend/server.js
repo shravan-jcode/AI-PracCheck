@@ -4,6 +4,8 @@ import cookieParser from "cookie-parser";
 import connectDB from "./db/db.js";
 import cors from "cors";
 import userRoute from "./routes/user.route.js";
+import subjectRoute from "./routes/subject.route.js";
+
 
 dotenv.config();
 
@@ -20,6 +22,7 @@ app.use(cors({
 }));
 
 app.use("/api/v1/user", userRoute);
+app.use("/api/v1/subject", subjectRoute);
 
 const startServer = async () => {
   try {
